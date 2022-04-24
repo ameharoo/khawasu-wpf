@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:app"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="FontFamily"
+                    Value="Colibri" />
+        </Style>
+        
     </Application.Resources>
 </Application>

@@ -6,8 +6,21 @@
         xmlns:local="clr-namespace:app"
         mc:Ignorable="d"
         Title="Smarthome admin tool" Height="450" Width="600">
-    <DockPanel>
-        <local:device></local:device>
-        
-    </DockPanel>
+    <Grid ShowGridLines="True" >
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <local:Menu Width="300"></local:Menu>
+        <ListView x:Name="ListDevices"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  HorizontalContentAlignment="Stretch"
+                  Grid.Column="1">
+            <local:Relay></local:Relay>
+            <local:Relay></local:Relay>
+        </ListView>
+    </Grid>
 </Window>

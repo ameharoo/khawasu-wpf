@@ -8,23 +8,14 @@
              d:DesignHeight="88" d:DesignWidth="1020">
     <DockPanel>
         <StackPanel>
-            <Label Name="Title" Foreground="{DynamicResource PrimaryTextColor}" FontSize="24">Device name</Label>
-            <StackPanel Orientation="Horizontal">
-                <Label Name="Type" Foreground="{DynamicResource SecondaryTextColor}" FontSize="24">Type</Label>
-                <Label Name="Delim" Foreground="{DynamicResource DividerColor}" FontSize="24">-</Label>
-                <Label Name="Address" Foreground="{DynamicResource SecondaryTextColor}" FontSize="24">0F:0F:0F:0F:0F:0F</Label>
+            <Label Margin="0" Foreground="{DynamicResource PrimaryTextColor}" FontSize="24" Content="{Binding Title}"></Label>
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <Label Margin="0" Foreground="{DynamicResource SecondaryTextColor}" FontSize="24" Content="{Binding Type}"></Label>
+                <Label Margin="0" Foreground="{DynamicResource DividerColor}" FontSize="24">-</Label>
+                <Label Margin="0" Foreground="{DynamicResource SecondaryTextColor}" FontSize="24" Content="{Binding Address}"></Label>
             </StackPanel>
         
         </StackPanel>
-        <DockPanel>
-            <Button HorizontalAlignment="Right" 
-                    Width="106" 
-                    Height="50" 
-                    Margin="10" 
-                    Background="{DynamicResource AccentColor}"
-                    Foreground="{DynamicResource TextIconColor}">
-                Off
-            </Button>
-        </DockPanel>
+        <StackPanel x:Name="ActionStack" Orientation="Horizontal" HorizontalAlignment="Right"></StackPanel>
     </DockPanel>
 </UserControl>

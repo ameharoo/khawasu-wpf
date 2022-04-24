@@ -20,6 +20,8 @@ namespace app
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Khawasu dataInstance;
+        
         public MainWindow()
         {
             /* Palette for theme */
@@ -35,10 +37,25 @@ namespace app
                 new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0097A7")));
             Resources.Add("LightPrimaryColor", 
                 new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B2EBF2")));
+            Resources.Add("PrimaryColor", 
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00BCD4")));
             Resources.Add("TextIconColor", 
                 new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF")));
+
             
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Window));
+
+            dataInstance = new Khawasu("localhost:8080");
+            
+            ListDevices.Items.Clear();
+            foreach (var device in dataInstance.Devices)
+            {
+                if(device.Type == "Relay")
+                    ListDevices.Items.Add(new Relay { deviceData = device });
+                else
+                    ListDevices.Items.Add(new device { deviceData = device });
+            }
         }
     }
 }
