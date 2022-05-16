@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:app"
         mc:Ignorable="d"
-        Title="Smarthome admin tool" Height="450" Width="600">
+        Title="Smarthome admin tool" Height="450" Width="700">
     <Grid ShowGridLines="True" >
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -14,13 +14,19 @@
             <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <local:Menu Width="300"></local:Menu>
-        <ListView x:Name="ListDevices"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  HorizontalContentAlignment="Stretch"
-                  Grid.Column="1">
-            <local:Relay></local:Relay>
-            <local:Relay></local:Relay>
-        </ListView>
+        <local:Menu Width="200"></local:Menu>
+        <StackPanel Grid.Column="1">
+            <StackPanel x:Name="ListSensors" VerticalAlignment="Center" Orientation="Horizontal">
+                <local:TempHumSensor Width="150" Height="150"></local:TempHumSensor>
+                
+            </StackPanel>
+            <ListView x:Name="ListDevices"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      HorizontalContentAlignment="Stretch"
+                      >
+                <local:Relay></local:Relay>
+                <local:Relay></local:Relay>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Window>

@@ -8,14 +8,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b0cdc37-ceec-4640-aca1-745a1dc949f3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Khawasu.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Menu.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Menu.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Relay.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/TempHumSensor.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/TempHumSensor.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.khawasu-wpf/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.khawasu-wpf/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/app/App.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Khawasu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/app/Khawasu.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/app/MainWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/app/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Relay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/app/Relay.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/device.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/app/device.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/device.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/app/device.xaml.cs" afterDir="false" />
@@ -26,7 +25,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/0b5567882521e02aa3d40a7bce81b7235ccac4db588866e3498e614c3bc/CastHelpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1af51483c9bf18871cce649b9f966dd7be686536f998c33bba3c5fc4adea4a0/Task.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5df7d5d8e6f2e03621186ae5a075dd9e99bebdc0e45bfc6a1948a5a677263b59/DebugProvider.Windows.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6f8a2341df3e576facbaa45c2a22f64e4ba768bca92144adfb35fc3a31ed/WpfXamlLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/99ce68918e8ce265714f9675e9ba39cd76a2bacc289b1392b85a59c7cafd9/DebugProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b5a5f023a523a581a454531cb22c6bc8cadf2ffb8917b935a87d2e438e902/JToken.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -46,6 +50,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.environmentSetup",
     "vue.rearranger.settings.migration": "true"
   }
@@ -79,8 +84,17 @@
       <option name="presentableId" value="Default" />
       <updated>1650708640817</updated>
       <workItem from="1650708658608" duration="8870000" />
-      <workItem from="1650811828643" duration="16774000" />
+      <workItem from="1650811828643" duration="17044000" />
+      <workItem from="1652605109788" duration="30107000" />
     </task>
+    <task id="LOCAL-00001" summary="Add menu, device styles, and more.">
+      <created>1650828882324</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1650828882324</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,5 +115,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Add menu, device styles, and more." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add menu, device styles, and more." />
   </component>
 </project>

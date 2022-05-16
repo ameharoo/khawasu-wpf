@@ -6,16 +6,18 @@
              xmlns:local="clr-namespace:app"
              mc:Ignorable="d"
              d:DesignHeight="88" d:DesignWidth="1020">
-    <DockPanel>
-        <StackPanel>
-            <Label Margin="0" Foreground="{DynamicResource PrimaryTextColor}" FontSize="24" Content="{Binding Title}"></Label>
-            <StackPanel Margin="0" Orientation="Horizontal">
-                <Label Margin="0" Foreground="{DynamicResource SecondaryTextColor}" FontSize="24" Content="{Binding Type}"></Label>
-                <Label Margin="0" Foreground="{DynamicResource DividerColor}" FontSize="24">-</Label>
-                <Label Margin="0" Foreground="{DynamicResource SecondaryTextColor}" FontSize="24" Content="{Binding Address}"></Label>
+    <Border BorderBrush="{DynamicResource DividerColor}" BorderThickness="0 0 0 1">
+        <DockPanel>
+            <StackPanel>
+                <Label Margin="0" Foreground="{DynamicResource PrimaryTextColor}" FontSize="24" Content="{Binding Title}"></Label>
+                <StackPanel Margin="0" Orientation="Horizontal">
+                    <Label Margin="0" Foreground="{DynamicResource SecondaryTextColor}" FontSize="24" Content="{Binding Type}"></Label>
+                    <Label Margin="0" Foreground="{DynamicResource DividerColor}" FontSize="24">-</Label>
+                    <Label Margin="0" Foreground="{DynamicResource SecondaryTextColor}" FontSize="24" Content="{Binding Address}"></Label>
+                </StackPanel>
+            
             </StackPanel>
-        
-        </StackPanel>
-        <StackPanel x:Name="ActionStack" Orientation="Horizontal" HorizontalAlignment="Right"></StackPanel>
-    </DockPanel>
+            <StackPanel x:Name="ActionStack" Orientation="Horizontal" HorizontalAlignment="Right"></StackPanel>
+        </DockPanel>
+    </Border>
 </UserControl>
