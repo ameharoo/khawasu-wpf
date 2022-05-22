@@ -16,7 +16,7 @@ public partial class TempHumSensor : UserControl
     private double bestTemp = 24;
     private double bestHum = 65;
 
-    public Device deviceData;
+    public Device DeviceData;
     public Khawasu InstKhawasu;
 
     public string NameValue
@@ -90,7 +90,7 @@ public partial class TempHumSensor : UserControl
 
         TemperatureValue = 0;
         HumidityValue = 0;
-        NameValue = deviceData.Name;
+        NameValue = DeviceData.Name;
 
         //InstKhawasu = instKhawasu;
         

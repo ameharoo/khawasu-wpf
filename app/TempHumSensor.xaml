@@ -12,12 +12,10 @@
         <xrpb:RadialProgressBar Margin="0" Padding="0" Name="TempBar" Value="50"
                                 Width="150" Height="150"
                                 Foreground="Blue" OuterBackgroundBrush="Aqua" ArcWidth="23" ArcBackgroundWidth="23" />
-        <!-- <Ellipse Width="110" Height="110" Margin="20" Fill="White"></Ellipse> -->
         
         <xrpb:RadialProgressBar Margin="25" Padding="0" Name="HumBar" Value="70"
                                 Width="100" Height="100"
                                 Foreground="Blue" OuterBackgroundBrush="Aqua" ArcBackgroundWidth="5" ArcWidth="5"  />
-
         
         <DockPanel Margin="0 50" Width="150" >
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">

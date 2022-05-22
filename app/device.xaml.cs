@@ -13,7 +13,7 @@ public partial class device : UserControl
 
     private Device _deviceData;
     
-    public Device deviceData
+    public Device DeviceData
     {
         get => _deviceData;
         set

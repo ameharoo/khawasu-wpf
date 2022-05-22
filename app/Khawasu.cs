@@ -26,8 +26,8 @@ public struct Device
     public string GroupName;
     // Todo: add implementation attribs
     public List<object> Attribs;
-    public ConcurrentQueue<object> IncomingUpdates;
-    public ConcurrentQueue<string> OutcomingUpdates;
+    public ConcurrentQueue<object> IncomingUpdates = new ConcurrentQueue<object>();
+    public ConcurrentQueue<string> OutcomingUpdates = new ConcurrentQueue<string>();
     public Khawasu instance;
 
     public Device(string name, string type, string address, string groupName, Khawasu inst)
@@ -37,8 +37,6 @@ public struct Device
         Address = address;
         GroupName = groupName;
         Attribs = new List<object>();
-        IncomingUpdates = new ConcurrentQueue<object>();
-        OutcomingUpdates = new ConcurrentQueue<string>();
         instance = inst;
     }
 }
@@ -51,8 +49,12 @@ public class Khawasu
 
     public List<Device> Devices;
     public ConcurrentQueue<Device> Subscribes;
+    public ConcurrentQueue<string> ErrorLog;
     private Thread backgroundThread;
-    public Semaphore ThreadState = new Semaphore(0, 1);
+    public Semaphore ThreadState = new(0, 1);
+    public Semaphore UpdateDevicesSemaphore = new(0, 1);
+    public bool UpdateDevicesNew = false;
+    private Stopwatch UpdateDevicesTimer;
 
     public Khawasu(string hostname)
     {
@@ -60,9 +62,11 @@ public class Khawasu
         _client = new HttpClient();
 
         Subscribes = new ConcurrentQueue<Device>();
-
-        UpdateDevices();
+        ErrorLog = new ConcurrentQueue<string>();
         
+        UpdateDevicesTimer = new Stopwatch();
+        UpdateDevicesTimer.Start();
+
         // Run webhook thread
         backgroundThread = new Thread(WebhookTask);
         backgroundThread.Start();  
@@ -75,7 +79,15 @@ public class Khawasu
 
     public void UpdateDevices()
     {
+        Trace.WriteLine("Update started");
         Devices = GetDevices().Result;
+        UpdateDevicesSemaphore.Release();
+        Trace.WriteLine("Update Stoped");
+    }
+
+    private void PrintError(string value)
+    {
+        ErrorLog.Enqueue(value);
     }
 
     protected string GetTypeFromDevClass(int devClass)
@@ -147,12 +159,11 @@ public class Khawasu
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            PrintError(e.ToString());
         }
         
 
         return devices;
-        
     }
     
     private void WebhookTask()
@@ -168,11 +179,13 @@ public class Khawasu
 
             if ((string)responseJson["data"]["status"] != "ok")
             {
-                Console.WriteLine($"Webhook create error: {responseJson["data"]["status"]}");
+                PrintError($"Webhook create error: {responseJson["data"]["status"]}");
                 return;
             }
 
             var webhookUUID = (string)responseJson["data"]["uuid"];
+            
+            UpdateDevices();
 
             while (true)
             {
@@ -180,6 +193,12 @@ public class Khawasu
                 {
                     if(ThreadState.WaitOne(1))
                         break;
+
+                    if (UpdateDevicesTimer.Elapsed > TimeSpan.FromMilliseconds(60000))
+                    {
+                        UpdateDevices();
+                        UpdateDevicesTimer.Reset();
+                    }
                     
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
@@ -232,7 +251,7 @@ public class Khawasu
                 }
                 catch (Exception e)
                 {
-                    Trace.WriteLine(e);
+                    PrintError(e.ToString());
                 }
             }
 
@@ -241,7 +260,7 @@ public class Khawasu
         }
         catch (Exception e)
         {
-            Trace.WriteLine(e);
+            PrintError(e.ToString());
         }
         
     }

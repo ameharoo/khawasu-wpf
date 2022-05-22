@@ -14,19 +14,27 @@
             <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <local:Menu Width="200"></local:Menu>
-        <StackPanel Grid.Column="1">
-            <StackPanel x:Name="ListSensors" VerticalAlignment="Center" Orientation="Horizontal">
-                <local:TempHumSensor Width="150" Height="150"></local:TempHumSensor>
-                
+        <local:Menu Width="200" x:Name="AppMenu"></local:Menu>
+        <DockPanel  Grid.Column="1" >
+            <StackPanel Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Path=ActualHeight}" 
+                        Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Path=ActualWidth}" 
+                        x:Name="DevicesTab" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch">
+                <StackPanel Margin="15" x:Name="ListSensors" VerticalAlignment="Center" Orientation="Horizontal" Height="150">
+                    
+                </StackPanel>
+                <ListView x:Name="ListDevices"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          HorizontalContentAlignment="Stretch">
+                </ListView>
             </StackPanel>
-            <ListView x:Name="ListDevices"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      HorizontalContentAlignment="Stretch"
-                      >
-                <local:Relay></local:Relay>
-                <local:Relay></local:Relay>
-            </ListView>
-        </StackPanel>
+            <StackPanel Visibility="Collapsed" x:Name="LogTab" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBox x:Name="LogBox" HorizontalAlignment="Stretch"  
+                         Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}, Path=ActualHeight}" >
+                    
+                </TextBox>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

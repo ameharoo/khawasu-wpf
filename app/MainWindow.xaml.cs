@@ -52,36 +52,68 @@ namespace app
 
             DataInstance = new Khawasu("localhost:8080");
             
-            ListDevices.Items.Clear();
-            ListSensors.Children.Clear();
+            var deviceProcessing = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
+            deviceProcessing.Tick += redrawDevices;
+            deviceProcessing.Start();
             
-            foreach (var device in DataInstance.Devices)
+            AppMenu.ChangedOption += delegate(string param)
             {
-                if(device.Type == "Relay")
-                    ListDevices.Items.Add(new Relay {deviceData = device, DataInstance = DataInstance} );
-                else if (device.Type == "Temp-Sensor")
-                    ListSensors.Children.Add(new TempHumSensor{deviceData = device});
-                else
-                    ListDevices.Items.Add(new device {deviceData = device, DataInstance = DataInstance});
-                
-                //Subscribe to update
-                DataInstance.Subscribes.Enqueue(device);
-            }
+                if (param == "Devices")
+                {
+                    DevicesTab.Visibility = Visibility.Visible;
+                    LogTab.Visibility = Visibility.Collapsed;
+                }
+                else if(param == "Log")
+                {
+                    DevicesTab.Visibility = Visibility.Collapsed;
+                    LogTab.Visibility = Visibility.Visible;
+                }
+            };
             
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            timer.Tick += redrawDevices;
-            timer.Start();
-            
-           
+            var logProcessing = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
+            logProcessing.Tick += updateLog;
+            logProcessing.Start();
         }
 
-        void redrawDevices(object sender, EventArgs e)
+        void updateLog(object sender, EventArgs e)
         {
+            string error;
+            if (DataInstance.ErrorLog.TryDequeue(out error))
+            {
+                LogBox.Text += $"{DateTime.Now}: {error}\n";
+            }
+        }
+
+        void redrawDevices(object? sender, EventArgs e)
+        {
+            // If get update devices signal
+            if (DataInstance.UpdateDevicesSemaphore.WaitOne(1))
+            {
+                ListDevices.Items.Clear();
+                ListSensors.Children.Clear();
+            
+                foreach (var device in DataInstance.Devices)
+                {
+                    if(device.Type == "Relay")
+                        ListDevices.Items.Add(new Relay {DeviceData = device, DataInstance = DataInstance} );
+                    else if (device.Type == "Temp-Sensor")
+                    {
+                        ListSensors.Children.Add(new TempHumSensor { DeviceData = device });
+                    }
+                    else
+                        ListDevices.Items.Add(new device {DeviceData = device, DataInstance = DataInstance});
+                
+                    //Subscribe to update
+                    DataInstance.Subscribes.Enqueue(device);
+                }
+            }
+            
+            // New subscribe data
             foreach (var sensor in ListSensors.Children)
             {
                 var thsens = (TempHumSensor)sensor;
                 object new_data;
-                if (thsens.deviceData.IncomingUpdates.TryDequeue(out new_data))
+                if (thsens.DeviceData.IncomingUpdates.TryDequeue(out new_data))
                 {
                     thsens.UpdateStatus(new_data);
                 }
@@ -91,7 +123,7 @@ namespace app
             {
                 var device = (device)dev;
                 object new_data;
-                if (DataInstance.GetDeviceByAddress(device.Address).Value.IncomingUpdates.TryDequeue(out new_data))
+                if (DataInstance.GetDeviceByAddress(device.Address)!.Value!.IncomingUpdates.TryDequeue(out new_data))
                 {
                     device.UpdateStatus(new_data);
                 }
